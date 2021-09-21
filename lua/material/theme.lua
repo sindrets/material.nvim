@@ -105,14 +105,13 @@ theme.loadEditor = function ()
 		Cursor =				{ fg = material.cursor, bg = material.none, style = 'reverse' }, -- the character under the cursor
 		CursorIM =				{ fg = material.cursor, bg = material.none, style = 'reverse' }, -- like Cursor, but used when in IME mode
 		Directory =				{ fg = material.blue, bg = material.none }, -- directory names (and other special names in listings)
-		DiffAdd =				{ fg = material.green, bg = material.none, style = 'reverse' }, -- diff mode: Added line
-		DiffChange =			{ fg = material.blue, bg = material.none, style = 'reverse' }, --  diff mode: Changed line
-		DiffDelete =			{ fg = material.red, bg = material.none, style = 'reverse' }, -- diff mode: Deleted line
-		DiffText =				{ fg = material.fg, bg = material.none, style = 'reverse' }, -- diff mode: Changed text within a changed line
+		DiffAdd =				{ bg = material.diff_add }, -- diff mode: Added line
+		DiffChange =			{ bg = material.diff_change }, --  diff mode: Changed line
+		DiffDelete =			{ bg = material.diff_delete }, -- diff mode: Deleted line
+		DiffText =				{ bg = material.diff_text }, -- diff mode: Changed text within a changed line
 		ErrorMsg =				{ fg = material.error }, -- error messages
 		Folded =				{ fg = material.disabled, bg = material.none, style = 'italic' }, -- line used for closed folds
 		FoldColumn =			{ fg = material.blue }, -- 'foldcolumn'
-		IncSearch =				{ fg = material.highlight, bg = material.title, style = 'reverse' }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
 		LineNr =				{ fg = material.line_numbers }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
 		CursorLineNr =			{ fg = material.accent }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
 		MatchParen =			{ fg = material.yellow, bg = material.none, style = 'bold' }, -- The character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
@@ -120,22 +119,23 @@ theme.loadEditor = function ()
 		MoreMsg =				{ fg = material.accent }, -- |more-prompt|
 		NonText =				{ fg = material.disabled }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
 		Pmenu =					{ fg = material.text, bg = material.contrast }, -- Popup menu: normal item.
-		PmenuSel =				{ fg = material.accent, bg = material.active, style = 'italic' }, -- Popup menu: selected item.
+		PmenuSel =				{ fg = material.accent, bg = material.active }, -- Popup menu: selected item.
 		PmenuSbar =				{ fg = material.text, bg = material.contrast }, -- Popup menu: scrollbar.
 		PmenuThumb =			{ fg = material.fg, bg = material.border }, -- Popup menu: Thumb of the scrollbar.
 		Question =				{ fg = material.green }, -- |hit-enter| prompt and yes/no questions
-		QuickFixLine =			{ fg = material.highlight, bg = material.title, style = 'reverse' }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-		qfLineNr =				{ fg = material.highlight, bg = material.title, style = 'reverse' }, -- Line numbers for quickfix lists
-		Search =				{ fg = material.highlight, bg = material.title, style = 'reverse' }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
+		QuickFixLine =			{ fg = material.title, bg = material.highlight }, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+		qfLineNr =				{ fg = material.title }, -- Line numbers for quickfix lists
+		Search =				{ fg = material.title, bg = material.highlight }, -- Last search pattern highlighting (see 'hlsearch').  Also used for similar items that need to stand out.
+		IncSearch =				{ fg = material.black, bg = material.purple }, -- 'incsearch' highlighting; also used for the text replaced with ":s///c"
 		SpecialKey =			{ fg = material.purple }, -- Unprintable characters: text displayed differently from what it really is.  But not 'listchars' whitespace. |hl-Whitespace|
 		SpellBad =				{ fg = material.red, bg = material.none, style = 'italic,undercurl' }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
 		SpellCap =				{ fg = material.blue, bg = material.none, style = 'italic,undercurl' }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
 		SpellLocal =			{ fg = material.cyan, bg = material.none, style = 'italic,undercurl' }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
 		SpellRare =				{ fg = material.purple, bg = material.none, style = 'italic,undercurl' }, -- Word that is recognized by the spellchecker as one that is hardly ever used.  |spell| Combined with the highlighting used otherwise.
-		StatusLine =			{ fg = material.accent, bg = material.active }, -- status line of current window
-		StatusLineNC =  		{ fg = material.fg, bg = material.bg }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+		StatusLine =			{ fg = material.fg, bg = material.active }, -- status line of current window
+		StatusLineNC =  		{ fg = material.fg, bg = material.active }, -- status lines of not-current windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
 		StatusLineTerm =		{ fg = material.fg, bg = material.active }, -- status line of current terminal window
-		StatusLineTermNC =		{ fg = material.text, bg = material.bg }, -- status lines of not-current terminal windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+		StatusLineTermNC =		{ fg = material.text, bg = material.active }, -- status lines of not-current terminal windows Note: if this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
 		TabLineFill =			{ fg = material.fg }, -- tab pages line, where there are no labels
 		TablineSel =			{ fg = material.bg, bg = material.accent }, -- tab pages line, active tab page label
 		Tabline =				{ fg = material.fg },
@@ -143,7 +143,7 @@ theme.loadEditor = function ()
 		Visual =				{ fg = material.none, bg = material.selection }, -- Visual mode selection
 		VisualNOS =				{ fg = material.none, bg = material.selection }, -- Visual mode selection when vim is "Not Owning the Selection".
 		WarningMsg =			{ fg = material.yellow }, -- warning messages
-		Whitespace =			{ fg = material.fg }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+		Whitespace =			{ fg = material.subtle1 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
 		WildMenu =				{ fg = material.orange, bg = material.none, style = 'bold' }, -- current match in 'wildmenu' completion
 		CursorColumn =			{ fg = material.none, bg = material.active }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
 		CursorLine =			{ fg = material.none, bg = material.active }, -- Screen-line at the cursor, when 'cursorline' is set.  Low-priority if foreground (ctermfg OR guifg) is not set.
@@ -206,7 +206,7 @@ theme.loadTerminal = function ()
 	vim.g.terminal_color_5 = material.darkpurple
 	vim.g.terminal_color_6 = material.darkcyan
 	vim.g.terminal_color_7 = material.white
-	vim.g.terminal_color_8 = material.fg
+	vim.g.terminal_color_8 = material.comments
 	vim.g.terminal_color_9 = material.red
 	vim.g.terminal_color_10 = material.green
 	vim.g.terminal_color_11 = material.yellow
@@ -340,9 +340,9 @@ theme.loadLSP = function ()
 		LspDiagnosticsFloatingHint =            { fg = material.purple  }, -- used for "Hint" diagnostic messages in the diagnostics float
 		LspDiagnosticsVirtualTextHint =         { fg = material.purple  }, -- Virtual text "Hint"
 		LspDiagnosticsUnderlineHint =           { style = 'undercurl', sp = material.paleblue }, -- used to underline "Hint" diagnostics.
-		LspReferenceText =                      { fg = material.accent, bg = material.highlight }, -- used for highlighting "text" references
-		LspReferenceRead =                      { fg = material.accent, bg = material.highlight }, -- used for highlighting "read" references
-		LspReferenceWrite =                     { fg = material.accent, bg = material.highlight }, -- used for highlighting "write" references
+		LspReferenceText =                      { bg = material.active2 }, -- used for highlighting "text" references
+		LspReferenceRead =                      { bg = material.active2 }, -- used for highlighting "read" references
+		LspReferenceWrite =                     { bg = material.active2 }, -- used for highlighting "write" references
 	}
 
 	return lsp
@@ -400,15 +400,16 @@ theme.loadPlugins = function()
 
 		-- Telescope
 		TelescopeNormal =                       { fg = material.fg, bg = material.bg },
-		TelescopePromptBorder =                 { fg = material.cyan },
-		TelescopeResultsBorder =                { fg = material.purple },
-		TelescopePreviewBorder =                { fg = material.green },
+		TelescopePromptPrefix =                 { fg = material.purple },
+		TelescopePromptBorder =                 { fg = material.accent },
+		TelescopeResultsBorder =                { fg = material.accent },
+		TelescopePreviewBorder =                { fg = material.accent },
 		TelescopeSelectionCaret =               { fg = material.purple },
-		TelescopeSelection =                    { fg = material.purple, bg = material.active },
+		TelescopeSelection =                    { bg = material.active },
 		TelescopeMatching =                     { fg = material.cyan },
 
 		-- NvimTree
-		NvimTreeRootFolder =                    { fg = material.title, style = 'italic' },
+		NvimTreeRootFolder =                    { fg = material.green, style = 'bold' },
 		NvimTreeFolderName=                     { fg = material.text },
 		NvimTreeFolderIcon=                     { fg = material.accent },
 		NvimTreeEmptyFolderName=                { fg = material.disabled },
@@ -479,15 +480,15 @@ theme.loadPlugins = function()
 
 		-- Indent Blankline
 		IndentBlanklineChar =                   { fg = material.highlight },
-		IndentBlanklineContextChar =            { fg = material.fg },
+		IndentBlanklineContextChar =            { fg = material.accent },
 
 		-- Nvim dap
 		DapBreakpoint =                         { fg = material.red },
 		DapStopped =                            { fg = material.green },
 
 		-- Illuminate
-		illuminatedWord =						{ bg = material.highight },
-		illuminatedCurWord =					{ bg = material.highight },
+		illuminatedWord =						{ bg = material.highlight },
+		illuminatedCurWord =					{ bg = material.highlight },
 
 		-- Hop
 		HopNextKey =							{ fg = material.accent, style = 'bold' },

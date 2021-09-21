@@ -30,7 +30,14 @@ local material = {
 	cursor   =		'#FFCC00',
 	variable =		'#717CB4',
 
-	none     =      'NONE'
+	none     =      'NONE',
+
+    subtle1 =      '#3e4560',
+    active2 =       'white',
+    diff_add =      '#384e5b',
+    diff_delete =   '#4c3948',
+    diff_change =   '#383c5c',
+    diff_text =     '#4e5184',
 }
 
 -- Style specific colors
@@ -133,15 +140,17 @@ elseif vim.g.material_style == 'palenight' then
 	material.bg_alt =		'#1B1E2B'
 	material.fg =			'#A6ACCD'
 	material.text =			'#717CB4'
+    material.subtle1 =      '#3e4560'
 	material.comments =		'#676E95'
 	material.selection = 	'#444267'
 	material.contrast =		'#202331'
-	material.active =		'#414863'
+	material.active =		'#31364b'
+	material.active2 =		'#414863'
 	material.border =		'#676E95'
-	material.line_numbers =	'#3A3F58'
+	material.line_numbers =	'#414863'
 	material.highlight =	'#444267'
 	material.disabled =		'#515772'
-	material.accent =		'#AB47BC'
+	material.accent =		'#82AAFF'
 
 elseif vim.g.material_style == 'deep ocean' then
 	-- Deep Ocean theme style

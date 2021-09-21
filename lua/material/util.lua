@@ -60,34 +60,6 @@ function util.load()
 	end
 ---------------------------------REMOVE AS SOON AS POSSIBLE--------------------------------------------
 
-    -- Load plugins and lsp async
-    local async
-    async = vim.loop.new_async(vim.schedule_wrap(function ()
-        -- imort tables for plugins and lsp
-        local plugins = material.loadPlugins()
-        local lsp = material.loadLSP()
-
-        if config.disable.term_colors == false then
-          material.loadTerminal()
-        end
-
-        for group, colors in pairs(plugins) do
-            util.highlight(group, colors)
-        end
-
-        for group, colors in pairs(lsp) do
-            util.highlight(group, colors)
-        end
-		if type(config.custom_highlights) == 'table' then
-			for group, colors in pairs(config.custom_highlights) do
-				util.highlight(group, colors)
-			end
-		end
-		util.contrast()
-        async:close()
-
-    end))
-
     -- load base theme
     local editor = material.loadEditor()
     local syntax = material.loadSyntax()
@@ -104,7 +76,28 @@ function util.load()
     for group, colors in pairs(treesitter) do
         util.highlight(group, colors)
     end
-    async:send()
+
+    -- imort tables for plugins and lsp
+    local plugins = material.loadPlugins()
+    local lsp = material.loadLSP()
+
+    if config.disable.term_colors == false then
+      material.loadTerminal()
+    end
+
+    for group, colors in pairs(plugins) do
+        util.highlight(group, colors)
+    end
+
+    for group, colors in pairs(lsp) do
+        util.highlight(group, colors)
+    end
+    if type(config.custom_highlights) == 'table' then
+        for group, colors in pairs(config.custom_highlights) do
+            util.highlight(group, colors)
+        end
+    end
+    util.contrast()
 end
 
 return util
